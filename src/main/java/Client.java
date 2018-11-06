@@ -5,7 +5,6 @@ public class Client {
 
 	private ObjectOutputStream output;
 	private ObjectInputStream input;
-	private String message = "";
 	private String serverIP;
 	private Socket connection;
 
