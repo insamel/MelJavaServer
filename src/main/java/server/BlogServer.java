@@ -1,18 +1,20 @@
+package server;
+
 import java.io.*;
 import java.net.*;
 
-public class Server {
+public class BlogServer {
 	private ObjectOutputStream output;
 	private ObjectInputStream input;
 	private ServerSocket server;
 	private Socket connection;
 
 	// constructor
-	public void Server(){
+	public void BlogServer(){
 	}
 
 	public static void main(String[] args) {
-		Server newServer = new Server();					// Creates an object 'newServer', which will later hold all connections (?)
+		BlogServer newServer = new BlogServer();			// Creates an object 'newServer', which will later hold all connections (?)
 		newServer.startRunning();							// Start running 'server'. 
 	}	
 

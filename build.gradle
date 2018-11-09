@@ -19,13 +19,13 @@ plugins {
 
 task runServer(type: JavaExec) {
     classpath = sourceSets.main.runtimeClasspath
-    main = 'Server'
+    main = 'server.BlogServer'
     standardInput = System.in
 }
 
 task runClient(type: JavaExec) {
     classpath = sourceSets.main.runtimeClasspath
-    main = 'Client'
+    main = 'client.Client'
     //args '4040'
     standardInput = System.in
 }
