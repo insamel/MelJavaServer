@@ -19,7 +19,7 @@ plugins {
 
 task runServer(type: JavaExec) {
     classpath = sourceSets.main.runtimeClasspath
-    main = 'ServerTest'
+    main = 'Server'
     standardInput = System.in
 }
 

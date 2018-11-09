@@ -1,6 +1,5 @@
 public class ClientTest {
-    public static void main(String... args){
-		
+    public static void main(String... args){	
 		Client test = new Client("127.0.0.1"); // localhost
 		while(true){  
 			test.startRunning();
