@@ -5,20 +5,17 @@ public class Client {
 
 	private ObjectOutputStream output;
 	private ObjectInputStream input;
-	private String serverIP;
 	private Socket connection;
 
 	//constructor
-	public Client(String host){
-		serverIP = host;
+	public Client(){
 	}
 
     public static void main(String... args){	
-		Client client = new Client("127.0.0.1"); // localhost. IP always routing back to our own computer. 
+		Client client = new Client(); 
 		while(true){  
 			client.startRunning();
 		}
-		//clientSocket = serverSocket.accept();	// waits until client start up, and request connection on the host and port of the server. 
     }
 
 	//connect to server
@@ -27,7 +24,7 @@ public class Client {
 			connectToServer();
 			streamSetup();
 		}catch(EOFException eofException){
-			//showMessage("\n Client terminated the connection");
+			System.out.println("\n Client terminated the connection");
 		}catch(IOException ioException){
 			ioException.printStackTrace();
 		}finally{
@@ -37,7 +34,9 @@ public class Client {
 
 	//connect to server
 	private void connectToServer() throws IOException{
-		connection = new Socket(InetAddress.getByName(serverIP), 4040);
+		connection = new Socket("localhost", 4040); 
+		System.out.println("Connected to localhost in port 4040");
+		// Connects on localhost (IP that always route back to our own computer) and port 4040. 
 	}
 
 	//setup of IO streams

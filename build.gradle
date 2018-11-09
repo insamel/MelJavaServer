@@ -25,7 +25,7 @@ task runServer(type: JavaExec) {
 
 task runClient(type: JavaExec) {
     classpath = sourceSets.main.runtimeClasspath
-    main = 'ClientTest'
+    main = 'Client'
     //args '4040'
     standardInput = System.in
 }
