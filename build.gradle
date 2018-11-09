@@ -15,7 +15,20 @@ plugins {
 }
 
 // Define the main class for the application
-mainClassName = 'ServerTest'
+// mainClassName = 'ServerTest'
+
+task runServer(type: JavaExec) {
+    classpath = sourceSets.main.runtimeClasspath
+    main = 'ServerTest'
+    standardInput = System.in
+}
+
+task runClient(type: JavaExec) {
+    classpath = sourceSets.main.runtimeClasspath
+    main = 'ClientTest'
+    //args '4040'
+    standardInput = System.in
+}
 
 dependencies {
     // This dependency is found on compile classpath of this component and consumers.
