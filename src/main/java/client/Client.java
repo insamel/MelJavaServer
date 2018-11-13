@@ -1,9 +1,11 @@
 package client;
+import request.PostSubmission;
 
 import java.io.*;
 import java.net.*;
+import java.util.*;
 
-public class Client {
+public class Client{
 
 	private ObjectOutputStream output;
 	private ObjectInputStream input;
@@ -13,10 +15,13 @@ public class Client {
 	public Client(){
 	}
 
-    public static void main(String... args){	
+    public static void main(String... args) throws Exception {
+
 		Client client = new Client(); 
-		while(true){  
+		while(true){
+
 			client.startRunning();
+
 		}
     }
 
@@ -36,9 +41,7 @@ public class Client {
 
 	//connect to server
 	private void connectToServer() throws IOException{
-		connection = new Socket("localhost", 4040); 
-		System.out.println("Connected to localhost in port 4040");
-		// Connects on localhost (IP that always route back to our own computer) and port 4040. 
+		connection = new Socket("localhost", 4040);
 	}
 
 	//setup of IO streams
@@ -46,7 +49,13 @@ public class Client {
 		output = new ObjectOutputStream(connection.getOutputStream());
 		output.flush();
 		input = new ObjectInputStream(connection.getInputStream());
-	//	showMessage("\n The streams are now set up! \n");
+
+		String author = "Test-author_clientside";
+		String tweet = "lol_clientside";
+		Date timestamp = Calendar.getInstance().getTime();
+		PostSubmission user = new PostSubmission(author, tweet, timestamp);
+		output.writeObject(user);
+
 	}
 
 	//Close connection
