@@ -1,5 +1,6 @@
 package server;
 import request.PostSubmission;
+import data.Post;
 
 import java.io.*;
 import java.net.*;
@@ -12,7 +13,8 @@ public class BlogServer{
 	private ServerSocket server;
 	private Socket connection;
 	static Date timestamp = Calendar.getInstance().getTime();
-	static PostSubmission user = new PostSubmission("Author not initialized! Serverside.", "Tweet not initialized! Serverside.", timestamp);
+	private static Post post = new Post("Author not initialized! Serverside.", "Tweet not initialized! Serverside.", timestamp);
+	static PostSubmission user = new PostSubmission(post);
 
 	// constructor
 	public void BlogServer(){

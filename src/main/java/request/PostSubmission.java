@@ -1,27 +1,25 @@
 package request;
+import data.Post;
+
 import java.io.Serializable;
 import java.util.*;
 
 public class PostSubmission implements Serializable {
-	private String author;
-	private String tweet;
-    private Date timestamp;
-    public PostSubmission( String author,String tweet,Date timestamp){
-        this.author=author;
-        this.tweet=tweet;
-        this.timestamp=timestamp;
+    private Post post;
+    public PostSubmission( Post post ){
+        this.post=post;
 	}
 
-	public String getAuthor() {
-        return author;
+    public String getAuthor() {
+        return post.getAuthor();
     }
 
     public String getTweet() {
-        return tweet;
+        return post.getTweet();
     }
 
     public Date getTimestamp() {
-        return timestamp;
+        return post.getTimestamp();
     }
 
 }

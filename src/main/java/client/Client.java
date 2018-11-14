@@ -1,5 +1,6 @@
 package client;
 import request.PostSubmission;
+import data.Post;
 
 import java.io.*;
 import java.net.*;
@@ -86,14 +87,14 @@ public class Client{
 			System.out.println("timestamp \"" + timestamp +"\"");
 			System.out.println("author: \"" + author +"\"");
 			System.out.println("tweet: \"" + tweet +"\"");
-			PostSubmission user = new PostSubmission(author, tweet, timestamp);				//wrapping in a PostSubmission class before sending to the network
 		}else {
 			//handling if it is a request
 			System.out.println("Error. Action had wrong value. ");
 			String action = String.valueOf(System.in.read()); //if else for other letters
 		}
+		Post post = new Post(author, tweet, timestamp);				//wrapping in a PostSubmission class before sending to the network
 
-		PostSubmission user = new PostSubmission(author, tweet, timestamp);
+		PostSubmission user = new PostSubmission(post);
 		output.writeObject(user);
 	}
 }
