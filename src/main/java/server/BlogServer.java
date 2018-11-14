@@ -12,7 +12,7 @@ public class BlogServer{
 	private ServerSocket server;
 	private Socket connection;
 	static Date timestamp = Calendar.getInstance().getTime();
-	static PostSubmission user = new PostSubmission("3", "", timestamp);
+	static PostSubmission user = new PostSubmission("Author not initialized! Serverside.", "Tweet not initialized! Serverside.", timestamp);
 
 	// constructor
 	public void BlogServer(){
@@ -31,7 +31,7 @@ public class BlogServer{
 				try{
 					connection = server.accept();	 	// accepts if connection is possible and creates socket
 					streamSetup();
-					System.out.println(user.getAuthor());
+					doSomething();
 				}catch(EOFException eofException){		// when someone ends the connection, the following message will be displayed. 
 					System.out.print("Connection ended.");
 				}finally{
@@ -47,14 +47,7 @@ public class BlogServer{
 	private void streamSetup() throws IOException {
 		output = new ObjectOutputStream(connection.getOutputStream());	// creates object 'ObjectOutputStream'. From documentation about getOutputStream(): This method returns an OutputStream where the data can be written. 
 		output.flush();													// cleans the stream, if all bytes were not correctly send. 
-		input = new ObjectInputStream(connection.getInputStream());		// creates object 'ObjectInputStream'. From documentation about getInputStream(): This method returns an InputStream representing the data. 
-
-		try {
-			user = (PostSubmission) input.readObject();
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
-		}
-		System.out.print(user.getAuthor());
+		input = new ObjectInputStream(connection.getInputStream());		// creates object 'ObjectInputStream'. From documentation about getInputStream(): This method returns an InputStream representing the data.
 	}
 
 	// to close streams and sockets when connection is ended
@@ -66,5 +59,18 @@ public class BlogServer{
 		}catch(IOException ioException){
 			ioException.printStackTrace();
 		}
+	}
+
+	private void doSomething(){
+		try {
+			user = (PostSubmission) input.readObject();		// reads object send from clientside
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		System.out.println(user.getAuthor());
+		System.out.println(user.getTweet());
+		System.out.println(user.getTimestamp());
 	}
 }

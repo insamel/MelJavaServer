@@ -50,8 +50,8 @@ public class Client{
 		output.flush();
 		input = new ObjectInputStream(connection.getInputStream());
 
-		String author = "Test-author_clientside";
-		String tweet = "lol_clientside";
+		String author = "Author_clientside";
+		String tweet = "Tweet clientside";
 		Date timestamp = Calendar.getInstance().getTime();
 		PostSubmission user = new PostSubmission(author, tweet, timestamp);
 		output.writeObject(user);
