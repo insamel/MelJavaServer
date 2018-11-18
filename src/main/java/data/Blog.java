@@ -27,17 +27,17 @@ public class Blog implements Readable, Writable{
     }
     
     private void populateFromDisk() throws IOException {
-        List<Post> outputTweets = new LinkedList<Post>();
+      
         	  try {
         	    FileInputStream fis = new  FileInputStream("new.txt");
         	    ObjectInputStream ois = new ObjectInputStream(fis);
         	    Object obj = ois.readObject();
-        	    outputTweets = (LinkedList<Post>) obj;
+        	    tweets = (LinkedList<Post>) obj;
         	  } 
         	  catch (Exception e) {
         	    System.out.println(e);
         	  } 
-        	  tweets = outputTweets;
+        	  
         	
     }
 
