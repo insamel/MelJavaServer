@@ -11,10 +11,12 @@ public class Client{
 	private ObjectOutputStream output;
 	private ObjectInputStream input;
 	private Socket connection;
-	private int action;
+	private String action;
 	private String author;
 	private String tweet;
 	private Date timestamp;
+	private Scanner stringScanner;
+	private String action2;
 
 	//constructor
 	public Client(){
@@ -70,10 +72,11 @@ public class Client{
 		System.out.println("2: Read all tweets");
 		System.out.println("x: Exit");
 		System.out.println("What do you want to do?");
-		action = System.in.read(); //reads a char.
+		stringScanner = new Scanner(System.in);
+		action = stringScanner.next(); //reads a char.
 
-		if(action == 49){		// Ascii Dec value of char '1' is 49.
-			Scanner stringScanner = new Scanner(System.in);		// input string scanner using java Scanner class
+		if(action.equals("1")){		// Ascii Dec value of char '1' is 49.
+			
 
 			System.out.println("Please enter your username:");
 			author = stringScanner.next();
@@ -90,9 +93,9 @@ public class Client{
 		}else {
 			//handling if it is a request
 			System.out.println("Error. Action had wrong value. ");
-			String action = String.valueOf(System.in.read()); //if else for other letters
+			action2 = String.valueOf(System.in.read()); //WHAT IS THIS FOR??
 		}
-		Post post = new Post(author, tweet, timestamp);				//wrapping in a PostSubmission class before sending to the network
+		Post post = new Post(author, tweet, timestamp);				//wrapping in a Post class before sending to the network
 
 		PostSubmission user = new PostSubmission(post);
 		output.writeObject(user);
