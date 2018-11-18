@@ -27,17 +27,17 @@ public class Blog implements Readable, Writable{
     }
     
     private void populateFromDisk() throws IOException {
-        
+        List<Post> outputTweets = new LinkedList<Post>();
         	  try {
         	    FileInputStream fis = new  FileInputStream("new.txt");
         	    ObjectInputStream ois = new ObjectInputStream(fis);
         	    Object obj = ois.readObject();
-        	    tweets = (LinkedList<Post>) obj;
+        	    outputTweets = (LinkedList<Post>) obj;
         	  } 
         	  catch (Exception e) {
         	    System.out.println(e);
         	  } 
-        	  
+        	  tweets = outputTweets;
         	
     }
 
@@ -94,8 +94,7 @@ public class Blog implements Readable, Writable{
 		    FileOutputStream fos = new FileOutputStream ("new.txt");
 		    ObjectOutputStream oos = new ObjectOutputStream(fos);
 		    oos.writeObject(tweets);
-            fos.close();
-            oos.close();
+		    fos.close();
 		  } 
 		  catch (Exception e) {
 		    System.out.println(e);   
