@@ -1,11 +1,15 @@
 package server;
 import request.PostSubmission;
 import data.Post;
+import data.Blog;
 
 import java.io.*;
 import java.net.*;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
 
 public class BlogServer{
 	private ObjectOutputStream output;
@@ -15,9 +19,9 @@ public class BlogServer{
 	static Date timestamp = Calendar.getInstance().getTime();
 	private static Post post = new Post("Author not initialized! Serverside.", "Tweet not initialized! Serverside.", timestamp);
 	static PostSubmission user = new PostSubmission(post);
-
+	private static Blog blog = new Blog();
 	// constructor
-	public void BlogServer(){
+	public BlogServer(){
 	}
 
 	public static void main(String[] args) throws Exception {
@@ -65,14 +69,27 @@ public class BlogServer{
 
 	private void doSomething(){
 		try {
-			user = (PostSubmission) input.readObject();		// reads object send from clientside
+			user = (PostSubmission)input.readObject();		// reads object send from clientside
+			blog.addPost(user.getPost());
+			blog.save();
+			System.out.println("This is the latest post: "+ (blog.readOne()).getTweet());
+			
+			System.out.println("And now read all:");
+			List<Post> outputList = new LinkedList<Post>();
+			outputList = blog.readAll();
+			Post outputPost = new Post("default", "default", timestamp);
+			for(Iterator<Post> it = outputList.iterator(); it.hasNext();){
+	            outputPost = it.next();
+	            System.out.println(outputPost.getAuthor());
+	            System.out.println(outputPost.getTweet());
+	            System.out.println(outputPost.getTimestamp());
+	        }
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		System.out.println(user.getAuthor());
-		System.out.println(user.getTweet());
-		System.out.println(user.getTimestamp());
+		
 	}
+	
 }

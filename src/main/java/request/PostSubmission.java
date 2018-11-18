@@ -10,6 +10,9 @@ public class PostSubmission implements Serializable {
         this.post=post;
 	}
 
+    public Post getPost() {
+    	return this.post;
+    }
     public String getAuthor() {
         return post.getAuthor();
     }
